@@ -3,6 +3,7 @@ class Vehicle {
     this.pos = createVector(random(width), random(height));
     this.vel = p5.Vector.random2D();
     this.acc = createVector();
+    this.r = 2;
     this.maxForce = 1;
     this.maxSpeed = 10;
   }
@@ -10,13 +11,15 @@ class Vehicle {
   update() {
     this.pos.add(this.vel);
     this.vel.add(this.acc);
+    this.pos.x = constrain(this.pos.x, this.r, width - this.r);
+    this.pos.y = constrain(this.pos.y, this.r, height - this.r);
     this.acc.mult(0);
   }
 
   show() {
     fill(colorPicker.color());
     noStroke();
-    ellipse(this.pos.x, this.pos.y, 4);
+    ellipse(this.pos.x, this.pos.y, this.r * 2);
   }
 
   applyForce(force) {
