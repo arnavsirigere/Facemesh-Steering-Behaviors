@@ -1,5 +1,5 @@
 let video;
-let checkbox;
+let obstacleCheckbox, videoCheckbox;
 let colorPicker;
 let facemesh;
 let predictions;
@@ -11,7 +11,8 @@ function setup() {
   video = createCapture(VIDEO);
   video.size(width, height).hide();
   // Dom Elements
-  checkbox = createCheckbox('Have facemask flee from obstacle').checked(true);
+  obstacleCheckbox = createCheckbox('Have facemask flee from obstacle').checked(true);
+  videoCheckbox = createCheckbox('Draw Video').checked(true);
   createButton('Randomise Obstacle Velocity').mousePressed(() => {
     obstacle.xVel = random(-10, 10);
     obstacle.yVel = random(-10, 10);
@@ -30,15 +31,17 @@ function draw() {
   scale(-1, 1);
   clear();
   blendMode(ADD);
-  image(video, 0, 0, width, height);
   updateFacemesh();
-  if (checkbox.checked()) {
+  if (videoCheckbox.checked()) {
+    image(video, 0, 0, width, height);
+  }
+  if (obstacleCheckbox.checked()) {
     obstacle.show();
     obstacle.update();
   }
   for (const vehicle of vehicles) {
     vehicle.show();
-    if (checkbox.checked()) {
+    if (obstacleCheckbox.checked()) {
       vehicle.flee(obstacle);
     }
     vehicle.flee(createVector(map(mouseX, 0, width, width, 0), mouseY));
