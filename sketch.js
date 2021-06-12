@@ -1,5 +1,6 @@
 let video;
 let checkbox;
+let colorPicker;
 let facemesh;
 let predictions;
 let vehicles = [];
@@ -9,12 +10,14 @@ function setup() {
   createCanvas(640, 480);
   video = createCapture(VIDEO);
   video.size(width, height).hide();
-  // Checkbox and Button
+  // Dom Elements
   checkbox = createCheckbox('Have facemask flee from obstacle').checked(true);
   createButton('Randomise Obstacle Velocity').mousePressed(() => {
     obstacle.xVel = random(-10, 10);
     obstacle.yVel = random(-10, 10);
   });
+  createP('Customize Facemesh Color -> ');
+  colorPicker = createColorPicker('#00FF00').position(210, 542);
   // Facemesh and Obstacle
   facemesh = ml5.facemesh(video, () => console.log('Facemesh Model Ready!'));
   facemesh.on('predict', (results) => (predictions = results));

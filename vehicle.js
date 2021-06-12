@@ -14,7 +14,7 @@ class Vehicle {
   }
 
   show() {
-    fill(0, 255, 0);
+    fill(colorPicker.color());
     noStroke();
     ellipse(this.pos.x, this.pos.y, 4);
   }
