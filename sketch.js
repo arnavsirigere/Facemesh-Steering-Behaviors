@@ -18,7 +18,7 @@ function setup() {
     obstacle.yVel = random(-10, 10);
   });
   createP('Customize Facemesh Color -> ');
-  colorPicker = createColorPicker('#00FF00').position(210, 542);
+  colorPicker = createColorPicker('#00FF00').position(210, 562);
   // Facemesh and Obstacle
   facemesh = ml5.facemesh(video, () => console.log('Facemesh Model Ready!'));
   facemesh.on('predict', (results) => (predictions = results));
@@ -26,10 +26,10 @@ function setup() {
 }
 
 function draw() {
+  clear();
   background(0);
   translate(width, 0);
   scale(-1, 1);
-  clear();
   blendMode(ADD);
   updateFacemesh();
   if (videoCheckbox.checked()) {
